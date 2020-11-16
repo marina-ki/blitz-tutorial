@@ -168,3 +168,5 @@ The Blitz community is warm, safe, diverse, inclusive, and fun! Feel free to rea
 - [Forum discussions](https://github.com/blitz-js/blitz/discussions)
 - [Sponsors and donations](https://github.com/blitz-js/blitz#sponsors-and-donations)
 - [Contributing Guide](https://blitzjs.com/docs/contributing)
+
+# blitz-tutorial
