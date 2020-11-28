@@ -13,7 +13,10 @@ const QuestionForm = ({ initialValues, onSubmit }: QuestionFormProps) => {
         onSubmit(event)
       }}
     >
-      <div>Put your form fields here. But for now, just click submit</div>
+      <input placeholder="Name" />
+      <input placeholder="Choice 1" />
+      <input placeholder="Choice 2" />
+      <input placeholder="Choice 3" />
       <div>{JSON.stringify(initialValues)}</div>
       <button>Submit</button>
     </form>
