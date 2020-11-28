@@ -5,7 +5,7 @@ import getQuestion from "app/questions/queries/getQuestion"
 import updateQuestion from "app/questions/mutations/updateQuestion"
 import QuestionForm from "app/questions/components/QuestionForm"
 
-export const EditQuestion = () => {
+export const EditQuestion = (): JSX.Element => {
   const router = useRouter()
   const questionId = useParam("questionId", "number")
   const [question, { setQueryData }] = useQuery(getQuestion, { where: { id: questionId } })

@@ -6,7 +6,7 @@ type GetQuestionInput = Pick<FindFirstQuestionArgs, "where">
 export default async function getQuestion({ where }: GetQuestionInput, ctx: Ctx) {
   ctx.session.authorize()
 
-  const question = await db.question.findFirst({ where })
+  const question = await db.question.findFirst({ where, include: { choices: true } })
 
   if (!question) throw new NotFoundError()
 

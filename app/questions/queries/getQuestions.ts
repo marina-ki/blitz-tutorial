@@ -14,6 +14,7 @@ export default async function getQuestions(
     orderBy,
     take,
     skip,
+    include: { choices: true },
   })
 
   const count = await db.question.count()

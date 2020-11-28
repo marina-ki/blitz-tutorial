@@ -3,18 +3,38 @@ import Layout from "app/layouts/Layout"
 import { Link, useRouter, useQuery, useParam, BlitzPage, useMutation } from "blitz"
 import getQuestion from "app/questions/queries/getQuestion"
 import deleteQuestion from "app/questions/mutations/deleteQuestion"
+import updateChoice from "app/choices/mutations/updateChoice"
 
 export const Question = () => {
   const router = useRouter()
   const questionId = useParam("questionId", "number")
   const [question] = useQuery(getQuestion, { where: { id: questionId } })
   const [deleteQuestionMutation] = useMutation(deleteQuestion)
+  const [updateChoiceMutation] = useMutation(updateChoice)
+
+  const handleVote = async (id, votes) => {
+    try {
+      const updated = await updateChoiceMutation({
+        where: { id },
+        data: { votes: votes + 1 },
+      })
+      alert("Success!" + JSON.stringify(updated))
+    } catch (error) {
+      alert("Error creating question " + JSON.stringify(error, null, 2))
+    }
+  }
 
   return (
     <div>
-      <h1>Question {question.id}</h1>
-      <pre>{JSON.stringify(question, null, 2)}</pre>
-
+      <h1>{question.text}</h1>
+      <ul>
+        {question.choices.map((choice) => (
+          <li key={choice.id}>
+            {choice.text} - {choice.votes} votes
+            <button onClick={() => handleVote(choice.id, choice.votes)}>Vote</button>
+          </li>
+        ))}
+      </ul>
       <Link href={`/questions/${question.id}/edit`}>
         <a>Edit</a>
       </Link>
