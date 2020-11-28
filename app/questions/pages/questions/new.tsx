@@ -15,7 +15,21 @@ const NewQuestionPage: BlitzPage = () => {
         initialValues={{}}
         onSubmit={async () => {
           try {
-            const question = await createQuestionMutation({ data: { name: "MyName" } })
+            const question = await createQuestionMutation({
+              data: {
+                text: "MyName",
+                choices: {
+                  create: [
+                    {
+                      text: "Yes",
+                    },
+                    {
+                      text: "No",
+                    },
+                  ],
+                },
+              },
+            })
             alert("Success!" + JSON.stringify(question))
             router.push(`/questions/${question.id}`)
           } catch (error) {
