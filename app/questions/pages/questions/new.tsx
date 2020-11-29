@@ -12,7 +12,6 @@ const NewQuestionPage: BlitzPage = () => {
       <h1>Create New Question</h1>
 
       <QuestionForm
-        initialValues={{}}
         onSubmit={async (event) => {
           try {
             const question = await createQuestionMutation({
