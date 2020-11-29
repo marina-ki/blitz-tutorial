@@ -6,7 +6,7 @@ type UpdateQuestionInput = Pick<QuestionUpdateArgs, "where" | "data">
 export default async function updateQuestion({ where, data }: UpdateQuestionInput, ctx: Ctx) {
   ctx.session.authorize()
 
-  const question = await db.question.update({ where, data })
+  const question = await db.question.update({ where, data, include: { choices: true } })
 
   return question
 }

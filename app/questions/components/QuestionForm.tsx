@@ -1,7 +1,10 @@
+import { Choice, Question } from "@prisma/client"
 import React from "react"
 
 type QuestionFormProps = {
-  initialValues: any
+  initialValues: Question & {
+    choices: Choice[]
+  }
   onSubmit: React.FormEventHandler<HTMLFormElement>
 }
 
@@ -13,11 +16,10 @@ const QuestionForm = ({ initialValues, onSubmit }: QuestionFormProps) => {
         onSubmit(event)
       }}
     >
-      <input placeholder="Name" />
-      <input placeholder="Choice 1" />
-      <input placeholder="Choice 2" />
-      <input placeholder="Choice 3" />
-      <div>{JSON.stringify(initialValues)}</div>
+      <input placeholder="Name" defaultValue={initialValues.text} />
+      <input placeholder="Choice 1" defaultValue={initialValues.choices[0].text} />
+      <input placeholder="Choice 2" defaultValue={initialValues.choices[1].text} />
+      <input placeholder="Choice 3" defaultValue={initialValues.choices[2].text} />
       <button>Submit</button>
     </form>
   )

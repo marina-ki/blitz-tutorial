@@ -18,11 +18,41 @@ export const EditQuestion = (): JSX.Element => {
 
       <QuestionForm
         initialValues={question}
-        onSubmit={async () => {
+        onSubmit={async (event) => {
           try {
             const updated = await updateQuestionMutation({
               where: { id: question.id },
-              data: { text: "MyNewName" },
+              data: {
+                text: event.target[0].value,
+                choices: {
+                  update: [
+                    {
+                      where: {
+                        id: question.choices[0].id,
+                      },
+                      data: {
+                        text: event.target[0].value,
+                      },
+                    },
+                    {
+                      where: {
+                        id: question.choices[1].id,
+                      },
+                      data: {
+                        text: event.target[1].value,
+                      },
+                    },
+                    {
+                      where: {
+                        id: question.choices[2].id,
+                      },
+                      data: {
+                        text: event.target[2].value,
+                      },
+                    },
+                  ],
+                },
+              },
             })
             await setQueryData(updated)
             alert("Success!" + JSON.stringify(updated))

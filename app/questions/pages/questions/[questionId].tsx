@@ -8,7 +8,7 @@ import updateChoice from "app/choices/mutations/updateChoice"
 export const Question = () => {
   const router = useRouter()
   const questionId = useParam("questionId", "number")
-  const [question] = useQuery(getQuestion, { where: { id: questionId } })
+  const [question, { setQueryData }] = useQuery(getQuestion, { where: { id: questionId } })
   const [deleteQuestionMutation] = useMutation(deleteQuestion)
   const [updateChoiceMutation] = useMutation(updateChoice)
 
@@ -18,6 +18,8 @@ export const Question = () => {
         where: { id },
         data: { votes: votes + 1 },
       })
+      // await setQueryData((data)=>({...data}))
+      //alertが無いと更新されない
       alert("Success!" + JSON.stringify(updated))
     } catch (error) {
       alert("Error creating question " + JSON.stringify(error, null, 2))
